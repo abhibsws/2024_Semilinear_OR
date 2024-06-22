@@ -40,6 +40,7 @@ linS = {'-','--',':'}; ms = 4; fs = 16;
 
 figure(1)
 set(gcf,'position',[0 0 500 600])
+set(0,'DefaultLineLineWidth',3);
 for k = 1:length(Epsilon)
     ep = Epsilon(k);
     for i = 1:2
@@ -87,6 +88,7 @@ print(gcf,figure_name,'-dpdf','-r100','-bestfit')
 % Plot
 figure(2)
 set(gcf,'position',[0 0 500 600])
+set(0,'DefaultLineLineWidth',3);
 legendEntries = {}; C = {'b','r','g','k','m'}; Cref = {[0.5,0.5,0.5]};
 linS = {'-','--',':'}; ms = 4; fs = 14;
 for k = 1:length(Epsilon)
@@ -137,6 +139,7 @@ print(gcf,figure_name,'-dpdf','-r100','-bestfit')
 % Plot
 figure(3)
 set(gcf,'position',[0 0 500 600])
+set(0,'DefaultLineLineWidth',3);
 legendEntries = {}; C = {'b','r','g','k','m'}; Cref = {[0.5,0.5,0.5]};
 linS = {'-','--',':'}; ms = 4; fs = 14;
 for k = 1:length(Epsilon)

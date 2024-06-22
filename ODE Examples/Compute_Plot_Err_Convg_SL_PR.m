@@ -36,10 +36,11 @@ end
 dts = DTS{1,1}(1,:);
 
 % Plot
-set(gcf,'position',[0 0 600 800])
 legendEntries = {}; C = {'b','r','g','k','m','y'}; Cref = {[0.5,0.5,0.5]};
 linS = {'-','--',':'}; ms = 4; fs = 16;
 figure(1)
+set(gcf,'position',[0 0 600 800])
+set(0,'DefaultLineLineWidth',3);
 for k = 1:length(Lambda)
     lambda = Lambda(k);
     for i = 1:2
@@ -87,6 +88,7 @@ print(gcf,figure_name,'-dpdf','-r100','-bestfit')
 % Plot
 figure(2)
 set(gcf,'position',[0 0 600 800])
+set(0,'DefaultLineLineWidth',3);
 legendEntries = {}; 
 for k = 1:length(Lambda)
     lambda = Lambda(k);
@@ -135,6 +137,7 @@ print(gcf,figure_name,'-dpdf','-r100','-bestfit')
 % Plot
 figure(3)
 set(gcf,'position',[0 0 600 800])
+set(0,'DefaultLineLineWidth',3);
 legendEntries = {};
 for k = 1:length(Lambda)
     lambda = Lambda(k);
