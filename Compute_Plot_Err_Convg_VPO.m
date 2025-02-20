@@ -40,6 +40,7 @@ linS = {'-','--',':'}; Mar = {'o','s','+','*','d'}; ms = 10; fs = 20;
 
 figure(1)
 set(gcf,'position',[0 0 600 600])
+set(gca, 'LooseInset', max(get(gca, 'TightInset'), 0)); % remove white space
 set(0,'DefaultLineLineWidth',3);
 legendEntries = {};
 for k = 1:length(Epsilon)
@@ -48,12 +49,13 @@ for k = 1:length(Epsilon)
         s=S(i); p=P(i); q=Q(i); scheme_no=SchNo(i); 
         if mod(i, 2) == 1
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'s-','color',C{k},'marker',Mar{k},'MarkerSize',ms);
+            hold on 
+            legendEntries{end+1} = sprintf('$\\epsilon = %.e: (\\mathbf{%d},\\mathbf{%d},\\mathbf{%d})$', ep, s, p, q);
         else 
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'--','color',C{k},'marker',Mar{k},'MarkerSize',ms);
+            hold on
+            legendEntries{end+1} = sprintf('$\\epsilon = %.e: (%d,%d,%d)$', ep, s, p, q);
         end
-        hold on
-        % Create legend entry
-        legendEntries{end+1} = sprintf('$\\epsilon = %.e: (%d,%d,%d)$', ep, s, p, q);
     end
 end
 % reference slope
@@ -79,6 +81,9 @@ xlabel('\Delta t');
 ylabel('Error');
 grid minor
 set(gca,'FontSize',fs)
+% Tighten axis limits and position
+axis tight
+set(gca, 'Position', [0.1 0.1 0.80 0.80]); % Adjust to reduce margins
 % Set legend
 legend(legendEntries, 'Interpreter', 'latex','NumColumns',1,'Location','southeast', 'Box', 'off','FontSize',fs)
 
@@ -98,12 +103,13 @@ for k = 1:length(Epsilon)
         s=S(i); p=P(i); q=Q(i); scheme_no=SchNo(i); 
         if mod(i, 2) == 1
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'s-','color',C{k},'marker',Mar{k},'MarkerSize',ms);
+            hold on
+            legendEntries{end+1} = sprintf('$\\epsilon = %.e: (\\mathbf{%d},\\mathbf{%d},\\mathbf{%d})$', ep, s, p, q);
         else 
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'--','color',C{k},'marker',Mar{k},'MarkerSize',ms);
+            hold on
+            legendEntries{end+1} = sprintf('$\\epsilon = %.e: (%d,%d,%d)$', ep, s, p, q);
         end
-        hold on
-        % Create legend entry
-        legendEntries{end+1} = sprintf('$\\epsilon =  %.e: (%d,%d,%d)$', ep, s, p, q);
     end
 end
 

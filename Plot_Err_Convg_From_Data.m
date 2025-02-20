@@ -39,6 +39,7 @@ for eq_ind = 1:3
             for i = 1:3
                 figure(i)
                 set(gcf,'position',[0 0 600 600])
+                set(gca, 'LooseInset', max(get(gca, 'TightInset'), 0)); % remove white space
                 set(0,'DefaultLineLineWidth',3);
                 loglog(dts(2*i-1,:),U_Err(2*i-1,:),'linestyle',linS{1},'color',C{1},'marker',Mar{1},'MarkerSize',ms)
                 hold on
@@ -47,10 +48,12 @@ for eq_ind = 1:3
                 loglog(dts(2*i-1,st(2*i-1):en(2*i-1)),Cof(2*i-1)*dts(2*i-1,st(2*i-1):en(2*i-1)).^Sl(2*i-1),'--','color',Cref{1})
                 loglog(dts(2*i,st(2*i):en(2*i)),Cof(2*i)*dts(2*i,st(2*i):en(2*i)).^Sl(2*i),'-','color',Cref{1})
                 legend('','Location', 'northwest')
-                legend({sprintf('(%d,%d,%d)',S(2*i-1),P(2*i-1),Q(2*i-1)),...
-                sprintf('(%d,%d,%d)-SL',S(2*i),P(2*i),Q(2*i)),...
-                sprintf('Slope %d',Sl(2*i-1)),...
-                sprintf('Slope %d',Sl(2*i))},'NumColumns',2)
+
+                legend({sprintf('$\\mathbf{\\textbf{(%d,%d,%d)}}$', S(2*i-1), P(2*i-1), Q(2*i-1)),...
+                sprintf('(%d,%d,%d)', S(2*i), P(2*i), Q(2*i)),...
+                sprintf('Slope %d', Sl(2*i-1)),...
+                sprintf('Slope %d', Sl(2*i))},...
+                'NumColumns', 2, 'Interpreter', 'latex');
                 %
                 xlim([dts(1,end),dts(1,1)])
                 ylim([yl(i),yu(i)])
@@ -74,6 +77,7 @@ for eq_ind = 1:3
             for i = 1:2
                 figure(3+i)
                 set(gcf,'position',[0 0 600 600])
+                set(gca, 'LooseInset', max(get(gca, 'TightInset'), 0)); % remove white space
                 set(0,'DefaultLineLineWidth',3);
                 loglog(dts(2*i-1,:),U_Err(2*i-1,:),'linestyle',linS{1},'color',C{1},'marker',Mar{1},'MarkerSize',ms)
                 hold on
@@ -82,10 +86,12 @@ for eq_ind = 1:3
                 loglog(dts(2*i-1,st(2*i-1):en(2*i-1)),Cof(2*i-1)*dts(2*i-1,st(2*i-1):en(2*i-1)).^Sl(2*i-1),'--','color',Cref{1})
                 loglog(dts(2*i,st(2*i):en(2*i)),Cof(2*i)*dts(2*i,st(2*i):en(2*i)).^Sl(2*i),'-','color',Cref{1})
                 legend('','Location', 'best')
-                legend({sprintf('(%d,%d,%d)',S(2*i-1),P(2*i-1),Q(2*i-1)),...
-                sprintf('(%d,%d,%d)-SL',S(2*i),P(2*i),Q(2*i)),...
-                sprintf('Slope %d',Sl(2*i-1)),...
-                sprintf('Slope %d',Sl(2*i))},'NumColumns',2)
+
+                legend({sprintf('$\\mathbf{\\textbf{(%d,%d,%d)}}$', S(2*i-1), P(2*i-1), Q(2*i-1)),...
+                sprintf('(%d,%d,%d)', S(2*i), P(2*i), Q(2*i)),...
+                sprintf('Slope %d', Sl(2*i-1)),...
+                sprintf('Slope %d', Sl(2*i))},...
+                'NumColumns', 2, 'Interpreter', 'latex');
                 %
                 xlim([dts(1,end),dts(1,1)])
                 ylim([yl(i),yu(i)])
@@ -109,6 +115,7 @@ for eq_ind = 1:3
             for i = 1:2
                 figure(5+i)
                 set(gcf,'position',[0 0 600 600])
+                set(gca, 'LooseInset', max(get(gca, 'TightInset'), 0)); % remove white space
                 set(0,'DefaultLineLineWidth',3);
                 loglog(dts(2*i-1,:),U_Err(2*i-1,:),'linestyle',linS{1},'color',C{1},'marker',Mar{1},'MarkerSize',ms)
                 hold on
@@ -117,10 +124,12 @@ for eq_ind = 1:3
                 loglog(dts(2*i-1,st(2*i-1):en(2*i-1)),Cof(2*i-1)*dts(2*i-1,st(2*i-1):en(2*i-1)).^Sl(2*i-1),'--','color',Cref{1})
                 loglog(dts(2*i,st(2*i):en(2*i)),Cof(2*i)*dts(2*i,st(2*i):en(2*i)).^Sl(2*i),'-','color',Cref{1})
                 legend('','Location', 'best')
-                legend({sprintf('(%d,%d,%d)',S(2*i-1),P(2*i-1),Q(2*i-1)),...
-                sprintf('(%d,%d,%d)-SL',S(2*i),P(2*i),Q(2*i)),...
-                sprintf('Slope %d',Sl(2*i-1)),...
-                sprintf('Slope %d',Sl(2*i))},'NumColumns',2)
+
+                legend({sprintf('$\\mathbf{\\textbf{(%d,%d,%d)}}$', S(2*i-1), P(2*i-1), Q(2*i-1)),...
+                sprintf('(%d,%d,%d)', S(2*i), P(2*i), Q(2*i)),...
+                sprintf('Slope %d', Sl(2*i-1)),...
+                sprintf('Slope %d', Sl(2*i))},...
+                'NumColumns', 2, 'Interpreter', 'latex');
                 %
                 xlim([dts(1,end),dts(1,1)])
                 ylim([yl(i),yu(i)])
@@ -128,7 +137,7 @@ for eq_ind = 1:3
                 ylabel('Error');
                 grid minor
                 set(gca,'FontSize',fs)
-                %
+
                 figure_name = sprintf('Figures/%s_TC%d_tf%1.1f_m%d_sp_%d_s%dp%dq%d.pdf',eqn,TC,tf,m,spatial_order,S(2*i-1),P(2*i-1),Q(2*i-1));
                 print(gcf,figure_name,'-dpdf','-r100','-vector','-bestfit')
             end

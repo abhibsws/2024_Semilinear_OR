@@ -41,6 +41,7 @@ legendEntries = {}; C = {'b','r','g','k','m','y'}; Cref = {[0.5,0.5,0.5]};
 linS = {'-','--',':'}; Mar = {'o','s','+','*','d'}; ms = 10; fs = 20;
 figure(1)
 set(gcf,'position',[0 0 800 1000])
+set(gca, 'LooseInset', max(get(gca, 'TightInset'), 0)); % remove white space
 set(0,'DefaultLineLineWidth',3);
 for k = 1:length(Lambda)
     lambda = Lambda(k);
@@ -48,12 +49,13 @@ for k = 1:length(Lambda)
         s=S(i); p=P(i); q=Q(i); scheme_no=SchNo(i); 
         if mod(i, 2) == 1
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'s-','color',C{k},'marker',Mar{k},'MarkerSize',ms);
+            hold on
+            legendEntries{end+1} = sprintf('$\\lambda = -10^{%d}: (\\mathbf{%d},\\mathbf{%d},\\mathbf{%d})$', log10(abs(lambda)), s, p, q);            
         else 
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'--','color',C{k},'marker',Mar{k},'MarkerSize',ms);
+            hold on
+            legendEntries{end+1} = sprintf('$\\lambda = -10^{%d}: (%d,%d,%d)$',log10(abs(lambda)), s, p, q);
         end
-        hold on
-        % Create legend entry
-        legendEntries{end+1} = sprintf('$\\lambda = -10^{%d}: (%d,%d,%d)$',log10(abs(lambda)), s, p, q);
     end
 end
 
@@ -79,6 +81,7 @@ xlabel('\Delta t');
 ylabel('Error');
 grid minor
 set(gca,'FontSize',fs)
+
 % Set legend
 legend(legendEntries, 'Interpreter', 'latex','NumColumns',3,'Location','northoutside','Box','off','FontSize',fs)
 
@@ -89,6 +92,7 @@ print(gcf,figure_name,'-dpdf','-r100','-bestfit')
 % Plot
 figure(2)
 set(gcf,'position',[0 0 800 1000])
+set(gca, 'LooseInset', max(get(gca, 'TightInset'), 0)); % remove white space
 set(0,'DefaultLineLineWidth',3);
 legendEntries = {}; 
 for k = 1:length(Lambda)
@@ -97,12 +101,13 @@ for k = 1:length(Lambda)
         s=S(i); p=P(i); q=Q(i); scheme_no=SchNo(i); 
         if mod(i, 2) == 1
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'s-','color',C{k},'marker',Mar{k},'MarkerSize',ms);
+            hold on
+            legendEntries{end+1} = sprintf('$\\lambda = -10^{%d}: (\\mathbf{%d},\\mathbf{%d},\\mathbf{%d})$', log10(abs(lambda)), s, p, q);        
         else 
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'--','color',C{k},'marker',Mar{k},'MarkerSize',ms);
+            hold on
+            legendEntries{end+1} = sprintf('$\\lambda = -10^{%d}: (%d,%d,%d)$',log10(abs(lambda)), s, p, q);
         end
-        hold on
-        % Create legend entry
-        legendEntries{end+1} = sprintf('$\\lambda = -10^{%d}: (%d,%d,%d)$', log10(abs(lambda)), s, p, q);
     end
 end
 
@@ -128,6 +133,8 @@ xlabel('\Delta t');
 ylabel('Error');
 grid minor
 set(gca,'FontSize',fs)
+
+
 % Set legend
 legend(legendEntries, 'Interpreter', 'latex','NumColumns',3,'Location','northoutside','Box','off','FontSize',fs)
 
@@ -138,6 +145,7 @@ print(gcf,figure_name,'-dpdf','-r100','-bestfit')
 % Plot
 figure(3)
 set(gcf,'position',[0 0 800 1000])
+set(gca, 'LooseInset', max(get(gca, 'TightInset'), 0)); % remove white space
 set(0,'DefaultLineLineWidth',3);
 legendEntries = {};
 for k = 1:length(Lambda)
@@ -146,12 +154,13 @@ for k = 1:length(Lambda)
         s=S(i); p=P(i); q=Q(i); scheme_no=SchNo(i); 
         if mod(i, 2) == 1
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'s-','color',C{k},'marker',Mar{k},'MarkerSize',ms);
+            hold on
+            legendEntries{end+1} = sprintf('$\\lambda = -10^{%d}: (\\mathbf{%d},\\mathbf{%d},\\mathbf{%d})$', log10(abs(lambda)), s, p, q);          
         else 
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'--','color',C{k},'marker',Mar{k},'MarkerSize',ms);
+            hold on
+            legendEntries{end+1} = sprintf('$\\lambda = -10^{%d}: (%d,%d,%d)$',log10(abs(lambda)), s, p, q);
         end
-        hold on
-        % Create legend entry
-        legendEntries{end+1} = sprintf('$\\lambda = -10^{%d}: (%d,%d,%d)$', log10(abs(lambda)), s, p, q);
     end
 end
 
@@ -177,6 +186,7 @@ xlabel('\Delta t');
 ylabel('Error');
 grid minor
 set(gca,'FontSize',fs)
+
 % Set legend
 legend(legendEntries, 'Interpreter', 'latex','NumColumns',3,'Location','northoutside','Box','off','FontSize',fs)
 
