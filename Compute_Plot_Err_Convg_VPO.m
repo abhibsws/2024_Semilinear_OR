@@ -78,7 +78,7 @@ legendEntries{end+1} = sprintf('Slope %d',sl1(3));
 xlim([dts(1,end),dts(1,1)])
 ylim([1e-14,1e-4])
 xlabel('\Delta t');
-ylabel('Error');
+ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-5, 1e-7, 0])
 grid minor
 set(gca,'FontSize',fs)
 % Tighten axis limits and position
@@ -132,7 +132,7 @@ legendEntries{end+1} = sprintf('Slope %d',sl2(3));
 xlim([dts(1,end),dts(1,1)])
 ylim([1e-13,4e-2])
 xlabel('\Delta t');
-ylabel('Error');
+ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-5, 1e-7, 0])
 grid minor
 set(gca,'FontSize',fs)
 % Set legend

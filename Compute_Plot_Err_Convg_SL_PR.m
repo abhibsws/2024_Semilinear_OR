@@ -1,7 +1,7 @@
-eqn='SL_PR'; TC=1; tf=1;
+eqn='SL_PR'; TC=1; tf=1.2;
 
 % Lambda = [-10,-10^2,-10^3,-10^4,-10^5];
-Lambda = [-10,-10^2,-10^3];
+Lambda = [-10^1,-10^3,-10^5];
 NT = 2.^(1:1:10);  
 % DIRK-(s,p,q) scheme
 S=[8,5,7,5,10,5]; 
@@ -38,7 +38,7 @@ dts = DTS{1,1}(1,:);
 
 % Plot
 legendEntries = {}; C = {'b','r','m','k','g','y'}; Cref = {[0.5,0.5,0.5]};
-linS = {'-','--',':'}; Mar = {'o','s','+','*','d'}; ms = 10; fs = 20;
+linS = {'-','--',':'}; Mar = {'o','s','+','*','d'}; ms = 10; fs = 26;
 figure(1)
 set(gcf,'position',[0 0 800 1000])
 set(gca, 'LooseInset', max(get(gca, 'TightInset'), 0)); % remove white space
@@ -78,12 +78,12 @@ legendEntries{end+1} = sprintf('Slope %d',sl1(3));
 xlim([dts(1,end),dts(1,1)])
 ylim([5e-17,5e-3])
 xlabel('\Delta t');
-ylabel('Error');
+ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-5, 1e-7, 0])
 grid minor
 set(gca,'FontSize',fs)
 
 % Set legend
-legend(legendEntries, 'Interpreter', 'latex','NumColumns',3,'Location','northoutside','Box','off','FontSize',fs)
+legend(legendEntries, 'Interpreter', 'latex','NumColumns',2,'Location','northoutside','Box','off','FontSize',fs)
 
 % Save as pdf
 figure_name = sprintf('Figures/%s_TC%d_tf%1.1f_Convg_s%dp%dq%d.pdf',eqn,TC,tf,S(1),P(1),Q(1));
@@ -130,13 +130,13 @@ legendEntries{end+1} = sprintf('Slope %d',sl2(3));
 xlim([dts(1,end),dts(1,1)])
 ylim([5e-17,5e-3])
 xlabel('\Delta t');
-ylabel('Error');
+ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-5, 1e-7, 0])
 grid minor
 set(gca,'FontSize',fs)
 
 
 % Set legend
-legend(legendEntries, 'Interpreter', 'latex','NumColumns',3,'Location','northoutside','Box','off','FontSize',fs)
+legend(legendEntries, 'Interpreter', 'latex','NumColumns',2,'Location','northoutside','Box','off','FontSize',fs)
 
 % Save as pdf
 figure_name = sprintf('Figures/%s_TC%d_tf%1.1f_Convg_s%dp%dq%d.pdf',eqn,TC,tf,S(3),P(3),Q(3));
@@ -183,12 +183,12 @@ legendEntries{end+1} = sprintf('Slope %d',sl3(3));
 xlim([dts(1,end),dts(1,1)])
 ylim([4e-17,8e-2])
 xlabel('\Delta t');
-ylabel('Error');
+ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-5, 1e-7, 0])
 grid minor
 set(gca,'FontSize',fs)
 
 % Set legend
-legend(legendEntries, 'Interpreter', 'latex','NumColumns',3,'Location','northoutside','Box','off','FontSize',fs)
+legend(legendEntries, 'Interpreter', 'latex','NumColumns',2,'Location','northoutside','Box','off','FontSize',fs)
 
 % Save as pdf
 figure_name = sprintf('Figures/%s_TC%d_tf%1.1f_Convg_s%dp%dq%d.pdf',eqn,TC,tf,S(5),P(5),Q(5));

@@ -58,9 +58,10 @@ for eq_ind = 1:3
                 xlim([dts(1,end),dts(1,1)])
                 ylim([yl(i),yu(i)])
                 xlabel('\Delta t');
-                ylabel('Error');
+                %ylabel('Error');
+                ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-5, 1e-7, 0])
                 grid minor
-                set(gca,'FontSize',fs)
+                set(gca,'FontSize',fs+5)
                 %
                 figure_name = sprintf('Figures/%s_TC%d_tf%1.1f_m%d_sp_%d_s%dp%dq%d.pdf',eqn,TC,tf,m,spatial_order,S(2*i-1),P(2*i-1),Q(2*i-1));
                 print(gcf,figure_name,'-dpdf','-r100','-vector','-bestfit')
@@ -96,7 +97,7 @@ for eq_ind = 1:3
                 xlim([dts(1,end),dts(1,1)])
                 ylim([yl(i),yu(i)])
                 xlabel('\Delta t');
-                ylabel('Error');
+                ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-6, 5e-8, 0])
                 grid minor
                 set(gca,'FontSize',fs)
                 %
@@ -111,6 +112,7 @@ for eq_ind = 1:3
             st = [1,4,1,4]; en = [4,7,4,7];
             Cof = [1e0,1e2,1e1,1e3]; Sl = [2,4,2,5]; 
             yl = [1e-11,1e-13]; yu = [2e-2,1e-1];
+            yl_pos = [-1.9e-7,5e-8];
             % Plot
             for i = 1:2
                 figure(5+i)
@@ -134,7 +136,7 @@ for eq_ind = 1:3
                 xlim([dts(1,end),dts(1,1)])
                 ylim([yl(i),yu(i)])
                 xlabel('\Delta t');
-                ylabel('Error');
+                ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-6, yl_pos(i), 0])
                 grid minor
                 set(gca,'FontSize',fs)
 
