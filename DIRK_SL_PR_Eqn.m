@@ -49,8 +49,8 @@ function z = nonlin_system_RHS(lambda,dt,ajj,g,rhs)
 end
 % Newton method to solve stage values
 function g = Newton_it(lambda,dt,ajj,rhs,u0)
-    err = 1.0; tol = 1e-14;
-    it = 1; maxit = 10;
+    err = 1.0; tol = 1e-16;
+    it = 1; maxit = 20;
     g = u0;
     while err>tol && it<maxit
         Pg = nonlin_system_RHS(lambda,dt,ajj,g,rhs);

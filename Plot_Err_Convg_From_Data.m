@@ -11,7 +11,7 @@ sp_or = {5,6,0};
 M = [2048,1e3,25];
 
 %plot colors and linestyles
-C = {'b','r','g'}; Cref = {[0.5,0.5,0.5]};
+C = {'b','r','m'}; Cref = {[0.5,0.5,0.5]};
 linS = {'-','--',':'}; Mar = {'o','s','+'}; ms = 10; fs = 20;
 
 % Create a folder to save figures

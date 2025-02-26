@@ -1,7 +1,7 @@
-eqn='SL_PR'; TC=1; tf=1.2;
+eqn='SL_PR'; TC=1; tf=1;
 
 % Lambda = [-10,-10^2,-10^3,-10^4,-10^5];
-Lambda = [-10,-10^3,-10^5];
+Lambda = [-10,-10^2,-10^3];
 NT = 2.^(1:1:10);  
 % DIRK-(s,p,q) scheme
 S=[8,5,7,5,10,5]; 
@@ -37,7 +37,7 @@ end
 dts = DTS{1,1}(1,:);
 
 % Plot
-legendEntries = {}; C = {'b','r','g','k','m','y'}; Cref = {[0.5,0.5,0.5]};
+legendEntries = {}; C = {'b','r','m','k','g','y'}; Cref = {[0.5,0.5,0.5]};
 linS = {'-','--',':'}; Mar = {'o','s','+','*','d'}; ms = 10; fs = 20;
 figure(1)
 set(gcf,'position',[0 0 800 1000])
