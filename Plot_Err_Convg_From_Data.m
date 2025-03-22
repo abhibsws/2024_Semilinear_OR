@@ -37,13 +37,18 @@ for eq_ind = 1:3
             yl = [5e-13,1e-13,1e-13]; yu = [5e-4,1e-3,1e-3];
             % Plot
             for i = 1:3
-                figure(i)
-                set(gcf,'position',[0 0 600 600])
-                set(gca, 'LooseInset', max(get(gca, 'TightInset'), 0)); % remove white space
-                set(0,'DefaultLineLineWidth',3);
-                loglog(dts(2*i-1,:),U_Err(2*i-1,:),'linestyle',linS{1},'color',C{1},'marker',Mar{1},'MarkerSize',ms)
+                %---------for minimum white space
+                % Ensure figure remains valid
+                fig = figure(i);
+                % Set figure size
+                set(fig, 'Units', 'pixels', 'Position', [50, 50, 600, 600]);
+                % Adjust axis to remove extra margins
+                ax = gca;
+                set(ax, 'LooseInset', [0, 0, 0, 0]);
+                %---------for minimum white space
+                loglog(dts(2*i-1,:),U_Err(2*i-1,:),'linestyle',linS{1},'color',C{1},'marker',Mar{1},'MarkerSize',ms+2)
                 hold on
-                loglog(dts(2*i,:),U_Err(2*i,:),'linestyle',linS{2},'color',C{1},'marker',Mar{2},'MarkerSize',ms)
+                loglog(dts(2*i,:),U_Err(2*i,:),'linestyle',linS{2},'color',C{1},'marker',Mar{2},'MarkerSize',ms+2)
                 hold on
                 loglog(dts(2*i-1,st(2*i-1):en(2*i-1)),Cof(2*i-1)*dts(2*i-1,st(2*i-1):en(2*i-1)).^Sl(2*i-1),'--','color',Cref{1})
                 loglog(dts(2*i,st(2*i):en(2*i)),Cof(2*i)*dts(2*i,st(2*i):en(2*i)).^Sl(2*i),'-','color',Cref{1})
@@ -57,8 +62,7 @@ for eq_ind = 1:3
                 %
                 xlim([dts(1,end),dts(1,1)])
                 ylim([yl(i),yu(i)])
-                xlabel('\Delta t');
-                %ylabel('Error');
+                xlabel('h', 'Position', get(gca, 'XLabel').Position + [0, 8e-14, 0])
                 ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-5, 1e-7, 0])
                 grid minor
                 set(gca,'FontSize',fs+5)
@@ -76,10 +80,15 @@ for eq_ind = 1:3
             yl = [2e-12,3e-13]; yu = [3e-3,7e-2]; 
             % Plot
             for i = 1:2
-                figure(3+i)
-                set(gcf,'position',[0 0 600 600])
-                set(gca, 'LooseInset', max(get(gca, 'TightInset'), 0)); % remove white space
-                set(0,'DefaultLineLineWidth',3);
+                %---------for minimum white space
+                % Ensure figure remains valid
+                fig = figure(3+i);
+                % Set figure size
+                set(fig, 'Units', 'pixels', 'Position', [50, 50, 500, 500]);
+                % Adjust axis to remove extra margins
+                ax = gca;
+                set(ax, 'LooseInset', [0, 0, 0, 0]);
+                %---------for minimum white space
                 loglog(dts(2*i-1,:),U_Err(2*i-1,:),'linestyle',linS{1},'color',C{1},'marker',Mar{1},'MarkerSize',ms)
                 hold on
                 loglog(dts(2*i,:),U_Err(2*i,:),'linestyle',linS{2},'color',C{1},'marker',Mar{2},'MarkerSize',ms)
@@ -96,7 +105,7 @@ for eq_ind = 1:3
                 %
                 xlim([dts(1,end),dts(1,1)])
                 ylim([yl(i),yu(i)])
-                xlabel('\Delta t');
+                xlabel('h', 'Position', get(gca, 'XLabel').Position + [-5e-3, 2e-14, 0])
                 ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-6, 5e-8, 0])
                 grid minor
                 set(gca,'FontSize',fs)
@@ -115,10 +124,15 @@ for eq_ind = 1:3
             yl_pos = [-1.9e-7,5e-8];
             % Plot
             for i = 1:2
-                figure(5+i)
-                set(gcf,'position',[0 0 600 600])
-                set(gca, 'LooseInset', max(get(gca, 'TightInset'), 0)); % remove white space
-                set(0,'DefaultLineLineWidth',3);
+                %---------for minimum white space
+                % Ensure figure remains valid
+                fig = figure(5+i);
+                % Set figure size
+                set(fig, 'Units', 'pixels', 'Position', [50, 50, 500, 500]);
+                % Adjust axis to remove extra margins
+                ax = gca;
+                set(ax, 'LooseInset', [0, 0, 0, 0]);
+                %---------for minimum white space
                 loglog(dts(2*i-1,:),U_Err(2*i-1,:),'linestyle',linS{1},'color',C{1},'marker',Mar{1},'MarkerSize',ms)
                 hold on
                 loglog(dts(2*i,:),U_Err(2*i,:),'linestyle',linS{2},'color',C{1},'marker',Mar{2},'MarkerSize',ms)
@@ -135,7 +149,7 @@ for eq_ind = 1:3
                 %
                 xlim([dts(1,end),dts(1,1)])
                 ylim([yl(i),yu(i)])
-                xlabel('\Delta t');
+                xlabel('h', 'Position', get(gca, 'XLabel').Position + [-5e-3, 2e-14, 0])
                 ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-6, yl_pos(i), 0])
                 grid minor
                 set(gca,'FontSize',fs)

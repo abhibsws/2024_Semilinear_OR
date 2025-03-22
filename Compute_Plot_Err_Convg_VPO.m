@@ -38,10 +38,15 @@ dts = DTS{1,1}(1,:);
 C = {'b','r','g','k','m'}; Cref = {[0.5,0.5,0.5]};
 linS = {'-','--',':'}; Mar = {'o','s','+','*','d'}; ms = 10; fs = 20;
 
-figure(1)
-set(gcf,'position',[0 0 600 600])
-set(gca, 'LooseInset', max(get(gca, 'TightInset'), 0)); % remove white space
-set(0,'DefaultLineLineWidth',3);
+%---------for minimum white space
+% Ensure figure remains valid
+fig = figure(1);
+% Set figure size
+set(fig, 'Units', 'pixels', 'Position', [50, 50, 500, 500]);
+% Adjust axis to remove extra margins
+ax = gca;
+set(ax, 'LooseInset', [0, 0, 0, 0]);
+%---------for minimum white space
 legendEntries = {};
 for k = 1:length(Epsilon)
     ep = Epsilon(k);
@@ -77,13 +82,13 @@ legendEntries{end+1} = sprintf('Slope %d',sl1(3));
 
 xlim([dts(1,end),dts(1,1)])
 ylim([1e-14,1e-4])
-xlabel('\Delta t');
+xlabel('h', 'Position', get(gca, 'XLabel').Position + [-5e-3, 5e-15, 0])
 ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-5, 1e-7, 0])
 grid minor
 set(gca,'FontSize',fs)
 % Tighten axis limits and position
-axis tight
-set(gca, 'Position', [0.1 0.1 0.80 0.80]); % Adjust to reduce margins
+% axis tight
+% set(gca, 'Position', [0.1 0.1 0.80 0.80]); % Adjust to reduce margins
 % Set legend
 legend(legendEntries, 'Interpreter', 'latex','NumColumns',1,'Location','southeast', 'Box', 'off','FontSize',fs)
 
@@ -93,9 +98,15 @@ print(gcf,figure_name,'-dpdf','-r100','-bestfit')
 
 
 % Plot
-figure(2)
-set(gcf,'position',[0 0 600 600])
-set(0,'DefaultLineLineWidth',3);
+%---------for minimum white space
+% Ensure figure remains valid
+fig = figure(2);
+% Set figure size
+set(fig, 'Units', 'pixels', 'Position', [50, 50, 500, 500]);
+% Adjust axis to remove extra margins
+ax = gca;
+set(ax, 'LooseInset', [0, 0, 0, 0]);
+%---------for minimum white space
 legendEntries = {};
 for k = 1:length(Epsilon)
     ep = Epsilon(k);
@@ -131,7 +142,7 @@ legendEntries{end+1} = sprintf('Slope %d',sl2(3));
 
 xlim([dts(1,end),dts(1,1)])
 ylim([1e-13,4e-2])
-xlabel('\Delta t');
+xlabel('h', 'Position', get(gca, 'XLabel').Position + [-5e-3, 2e-14, 0])
 ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-5, 1e-7, 0])
 grid minor
 set(gca,'FontSize',fs)
