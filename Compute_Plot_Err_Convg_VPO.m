@@ -38,6 +38,7 @@ dts = DTS{1,1}(1,:);
 C = {'b','r','g','k','m'}; Cref = {[0.5,0.5,0.5]};
 linS = {'-','--',':'}; Mar = {'o','s','+','*','d'}; ms = 10; fs = 20;
 
+% Plot
 %---------for minimum white space
 % Ensure figure remains valid
 fig = figure(1);
@@ -46,20 +47,21 @@ set(fig, 'Units', 'pixels', 'Position', [50, 50, 500, 500]);
 % Adjust axis to remove extra margins
 ax = gca;
 set(ax, 'LooseInset', [0, 0, 0, 0]);
+set(0,'DefaultLineLineWidth',3);
 %---------for minimum white space
 legendEntries = {};
 for k = 1:length(Epsilon)
-    ep = Epsilon(k);
+    exp = -log10(Epsilon(k));
     for i = 1:2
         s=S(i); p=P(i); q=Q(i); scheme_no=SchNo(i); 
         if mod(i, 2) == 1
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'s-','color',C{k},'marker',Mar{k},'MarkerSize',ms);
             hold on 
-            legendEntries{end+1} = sprintf('$\\epsilon = %.e: (\\mathbf{%d},\\mathbf{%d},\\mathbf{%d})$', ep, s, p, q);
+            legendEntries{end+1} = sprintf('$\\epsilon = 10^{-%d}: (\\mathbf{%d},\\mathbf{%d},\\mathbf{%d})$', exp, s, p, q);
         else 
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'--','color',C{k},'marker',Mar{k},'MarkerSize',ms);
             hold on
-            legendEntries{end+1} = sprintf('$\\epsilon = %.e: (%d,%d,%d)$', ep, s, p, q);
+            legendEntries{end+1} = sprintf('$\\epsilon = 10^{-%d}: (%d,%d,%d)$', exp, s, p, q);
         end
     end
 end
@@ -81,9 +83,9 @@ legendEntries{end+1} = sprintf('Slope %d',sl1(3));
 
 
 xlim([dts(1,end),dts(1,1)])
-ylim([1e-14,1e-4])
-xlabel('h', 'Position', get(gca, 'XLabel').Position + [-5e-3, 5e-15, 0])
-ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-5, 1e-7, 0])
+ylim([8e-15,5e-4])
+xlabel('h', 'Position', get(gca, 'XLabel').Position + [-5e-3, 2e-15, 0])
+ylabel('Error', 'Position', get(gca, 'YLabel').Position + [0.6e-4, 1e-7, 0])
 grid minor
 set(gca,'FontSize',fs)
 % Tighten axis limits and position
@@ -94,7 +96,8 @@ legend(legendEntries, 'Interpreter', 'latex','NumColumns',1,'Location','southeas
 
 % Save as pdf
 figure_name = sprintf('Figures/%s_TC%d_tf%1.1f_Convg_s%dp%dq%d.pdf',eqn,TC,tf,S(1),P(1),Q(1));
-print(gcf,figure_name,'-dpdf','-r100','-bestfit')
+%print(gcf,figure_name,'-dpdf','-r100','-bestfit')
+exportgraphics(gcf, figure_name, 'ContentType', 'vector')
 
 
 % Plot
@@ -106,20 +109,21 @@ set(fig, 'Units', 'pixels', 'Position', [50, 50, 500, 500]);
 % Adjust axis to remove extra margins
 ax = gca;
 set(ax, 'LooseInset', [0, 0, 0, 0]);
+set(0,'DefaultLineLineWidth',3);
 %---------for minimum white space
 legendEntries = {};
 for k = 1:length(Epsilon)
-    ep = Epsilon(k);
+    exp = -log10(Epsilon(k));
     for i = 3:4
         s=S(i); p=P(i); q=Q(i); scheme_no=SchNo(i); 
         if mod(i, 2) == 1
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'s-','color',C{k},'marker',Mar{k},'MarkerSize',ms);
             hold on
-            legendEntries{end+1} = sprintf('$\\epsilon = %.e: (\\mathbf{%d},\\mathbf{%d},\\mathbf{%d})$', ep, s, p, q);
+            legendEntries{end+1} = sprintf('$\\epsilon = 10^{-%d}: (\\mathbf{%d},\\mathbf{%d},\\mathbf{%d})$', exp, s, p, q);
         else 
             loglog(DTS{1,k}(i,:),U_ERR{1,k}(i,:),'--','color',C{k},'marker',Mar{k},'MarkerSize',ms);
             hold on
-            legendEntries{end+1} = sprintf('$\\epsilon = %.e: (%d,%d,%d)$', ep, s, p, q);
+            legendEntries{end+1} = sprintf('$\\epsilon = 10^{-%d}: (%d,%d,%d)$', exp, s, p, q);
         end
     end
 end
@@ -141,9 +145,9 @@ hold on
 legendEntries{end+1} = sprintf('Slope %d',sl2(3));
 
 xlim([dts(1,end),dts(1,1)])
-ylim([1e-13,4e-2])
-xlabel('h', 'Position', get(gca, 'XLabel').Position + [-5e-3, 2e-14, 0])
-ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-1e-5, 1e-7, 0])
+ylim([7e-16,2e-0])
+xlabel('h', 'Position', get(gca, 'XLabel').Position + [-0.6e-2, 1.5e-16, 0])
+ylabel('Error', 'Position', get(gca, 'YLabel').Position + [1e-4, 0.5e-7, 0])
 grid minor
 set(gca,'FontSize',fs)
 % Set legend
@@ -151,4 +155,5 @@ legend(legendEntries, 'Interpreter', 'latex','NumColumns',1,'Location','northwes
 
 % Save as pdf
 figure_name = sprintf('Figures/%s_TC%d_tf%1.1f_Convg_s%dp%dq%d.pdf',eqn,TC,tf,S(3),P(3),Q(3));
-print(gcf,figure_name,'-dpdf','-r100','-bestfit')
+% print(gcf,figure_name,'-dpdf','-r100','-bestfit')
+exportgraphics(gcf, figure_name, 'ContentType', 'vector')

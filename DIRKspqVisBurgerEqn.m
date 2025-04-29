@@ -85,7 +85,7 @@ function [uerr,duerr] = DIRKspqVisBurgerEqn(TC,tf,m,spatial_order,s,p,q,scheme_n
     u_true = ue(TC,x,tf); du_true = ue_x(TC,x,tf);
 
     % max norm
-    % uerr = max(abs(u_num-u_true)); duerr = max(abs(du_num-du_true));
+    %uerr = max(abs(u_num-u_true)); duerr = max(abs(du_num-du_true));
 
     % l_2 norm
     uerr = sqrt(sum((u_num - u_true).^2) / (m+2));

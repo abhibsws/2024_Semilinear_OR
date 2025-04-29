@@ -54,17 +54,24 @@ for i=1:nt
 end
 % true_sol is copied from RefSol...(:,end)
 if ep == 1e-1
-    true_sol = [   1.613276839978073; -0.943670141852980]; % ep = 1e-1 and dt = 1e-7
+    %true_sol = [1.613276839978073; -0.943670141852980]; % ep = 1e-1 and dt = 1e-7
+     true_sol = [1.613276839978089; -0.943670141852946]; % by ODE45 with tol 5e-14
 elseif ep == 1e-2
-    true_sol = [1.598829069390465; -1.018139709121219]; % ep = 1e-2 and dt = 1e-7
+    %true_sol = [1.598829069390465; -1.018139709121219]; % ep = 1e-2 and dt = 1e-7
+     true_sol = [1.598829069390726; -1.018139709120860]; % by ODE45 with tol 5e-14
 elseif ep == 1e-3
-    true_sol = [   1.596980778659228;-1.029103015879397]; % ep = 1e-3 and dt = 1e-7
+    %true_sol = [1.596980778659228; -1.029103015879397]; % ep = 1e-3 and dt = 1e-7
+     true_sol = [1.596980778659659; -1.029103015878781]; % by ODE45 with tol 5e-14
 elseif ep == 1e-4
-    true_sol = [   1.596789700158140; -1.030263287387102]; % ep = 1e-4 and dt = 1e-7
+    %true_sol = [1.596789700158140; -1.030263287387102]; % ep = 1e-4 and dt = 1e-7
+     true_sol = [1.596789700158133; -1.030263287387118]; % by ODE45 with tol 5e-14
 elseif ep == 1e-5
-    true_sol = [1.596770525704857; -1.030380015613961]; % ep = 1e-5 and dt = 1e-7
+    %true_sol = [1.596770525704857; -1.030380015613961]; % ep = 1e-5 and dt = 1e-7
+     true_sol = [1.596770525704804; -1.030380015614045 ]; % by ODE45 with tol 5e-14
 elseif ep == 1e-6
-    true_sol = [1.596768607589027; -1.030391695517091]; % ep = 1e-6 and dt = 1e-7
+    %true_sol = [1.596768607589027; -1.030391695517091]; % ep = 1e-6 and dt = 1e-7
+     true_sol = [1.596768607588914; -1.030391695517268]; % by ODE45 with tol 5e-14
+     
 else
     fprintf('The choice of the epsilon is NOT coded. \n')
 end

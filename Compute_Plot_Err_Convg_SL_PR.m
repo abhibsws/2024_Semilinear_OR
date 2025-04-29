@@ -44,7 +44,7 @@ colors = winter(length(Lambda));
 markers = {'o', 's', 'd', '^', 'v', '>', '<', 'p', 'h', '*', '+'}; linS = {':','--','-'};
 
 yu = [5e-4;5e-3;1e-5;5e-6;3e-7];
-yl = [3e-14;5e-16;1e-16;1e-16;1e-16];
+yl = [2e-14;5e-16;1e-16;1e-16;1e-16];
 
 or = [1,2,4;1,2,5;2,3,4;2,3,4;2,4,5];
 
@@ -52,10 +52,26 @@ st = [1,1,1;1,1,1;1,1,6;1,1,6;1,1,6];
 en = [8,16,8;6,16,10;6,6,12;6,8,14;6,6,12]; 
 
 coeff = [4e-8,5e-3,3e-3;
-         2e-2,5e-2,1e-2;
+         2e-2,5e-2,4e-2;
          6e-5,5e-8,1e-2;
-         5e-5,2e-8,1e-3;
+         5e-5,2e-8,5e-4;
          3e-6,3e-9,1e-2]; 
+
+% Coordinates to modify the positions of the xlabel and ylabel
+mod_XL = [
+          [0, 5e-15, 0];
+          [0, 1e-16, 0];
+          [0, 1.5e-17, 0];
+          [0, 1.5e-17, 0];
+          [0, 1.5e-17, 0];
+          ];
+mod_YL = [
+          [-2e-5, -2.3e-9, 0];
+          [-2e-5, 1e-12, 0];
+          [-2e-5, -2.2e-11, 0];
+          [-2e-5, -1.3e-11, 0];
+          [-2e-5, 2e-12, 0];
+          ];
 
 % Reference methods
 for i = 1:length(S)
@@ -79,7 +95,7 @@ for i = 1:length(S)
     end
     % reference slopes
     for j =1:3
-        loglog(dts(st(i,j):en(i,j)),coeff(i,j)*dts(st(i,j):en(i,j)).^or(i,j),'LineStyle', linS{j},'color',Cref{1})
+        loglog(dts(st(i,j):en(i,j)),coeff(i,j)*dts(st(i,j):en(i,j)).^or(i,j),'LineStyle', linS{j},'color',Cref{1},'LineWidth', 3)
         legendEntries{end+1} = sprintf('Slope %d',or(i,j));
         hold on
     end
@@ -88,19 +104,20 @@ for i = 1:length(S)
     ylim([yl(i),yu(i)])
     if q == 1
         title(sprintf('$(%d,%d,%d)$', s, p, q), 'Interpreter', 'latex'); 
-        xlabel('h', 'Position', get(gca, 'XLabel').Position + [0, 4e-17, 0])
-        ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-2e-5, 1e-7, 0])
+        xlabel('h', 'Position', get(gca, 'XLabel').Position + mod_XL(i,:))
+        ylabel('Error', 'Position', get(gca, 'YLabel').Position + mod_YL(i,:))
     else
         title(sprintf('$(\\mathbf{%d},\\mathbf{%d},\\mathbf{%d})$', s, p, q), 'Interpreter', 'latex'); 
-        xlabel('h', 'Position', get(gca, 'XLabel').Position + [0, 4e-17, 0])
-        ylabel('Error', 'Position', get(gca, 'YLabel').Position + [-2e-5, 1e-12, 0])
+        xlabel('h', 'Position', get(gca, 'XLabel').Position + mod_XL(i,:))
+        ylabel('Error', 'Position', get(gca, 'YLabel').Position + mod_YL(i,:))
     end
     grid minor
     set(gca,'FontSize',fs)
     legend(legendEntries, 'Interpreter', 'latex','NumColumns',2,'Location','best','Box','off','FontSize',fs)
     % Save as pdf
     figure_name = sprintf('Figures/%s_TC%d_tf%1.1f_Convg_s%dp%dq%d.pdf',eqn,TC,tf,s,p,q);
-    print(gcf,figure_name,'-dpdf','-r100','-bestfit')
+    %print(gcf,figure_name,'-dpdf','-r100','-bestfit')
+    exportgraphics(gcf, figure_name, 'ContentType', 'vector')
 end
 
 

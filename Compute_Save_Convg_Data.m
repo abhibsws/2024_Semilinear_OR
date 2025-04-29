@@ -1,6 +1,7 @@
-eq_ind = 1; % change here for different test cases
+eq_ind = 3; % change here for different test cases
 % Different test problems
 EQN = {'SemiLinAdv','VisBurgers','AllenCahn2D'};
+
 
 % Initial conditions
 IC = [1,1,1];
