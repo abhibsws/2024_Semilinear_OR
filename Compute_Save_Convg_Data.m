@@ -10,7 +10,7 @@ TF = [0.5,1,0.5];
 % Spatial orders
 sp_or = {5,6,'Cheb'};
 % Number of grid points
-M = [2048,1e3,25];
+M = [2048,1e3,24];
 
 eqn=EQN{eq_ind};
 TC=IC(eq_ind); tf=TF(eq_ind); m = M(eq_ind); spatial_order = sp_or{eq_ind};

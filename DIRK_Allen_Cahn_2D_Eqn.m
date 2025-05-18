@@ -68,7 +68,13 @@ function err = DIRK_Allen_Cahn_2D_Eqn(TC,tf,m,spatial_order,s,p,q,scheme_no,dt,n
     % err = max(max(abs(u-ut)));
 
     % l2 norm
-    err = sqrt(sum(sum((u - ut).^2)) / (m+1)^2);
+    % err = sqrt(sum(sum((u - ut).^2)) / (m+1)^2);
+
+    % Weighted norm that is correct approximation to L^2 norm
+    [w,~] = clenshawcurtiswx(m+1, xL, xR);
+    wij = w.*w';
+    u_2d = reshape(u,m+1,m+1); ut_2d = reshape(ut,m+1,m+1);
+    err = sqrt(sum(sum(wij.*(u_2d - ut_2d).^2)));
 
     % Plot
     % ax = [0,1,0,1,[1,3]]; % plot axes
@@ -133,6 +139,32 @@ function [D,x] = ChebArbDomain(N,xR,xL)
   k2 = (xR + xL)/2;
   x = k2 + k1*scheb;
   D = Dcheb/k1;
+end
+
+function [w,x] = clenshawcurtiswx(points, a, b)
+% Computes Chebyshev (Clenshaw-Curtis) nodes and quadrature weights
+% Input:  points - number of quadrature points (must be odd and ≥ 3)
+% Output: x - Chebyshev nodes in [-1,1]
+%         w - corresponding quadrature weights
+
+    N = points - 1;
+    
+    n = (0:N/2)';
+    k = 0:N/2;
+    
+    D = 2 * cos(2 * pi * (n * k) / N) / N;
+    D(1, :) = 0.5 * D(1, :);  % halve the first row
+
+    d = [1; (2 ./ (1 - (2:2:N).^2))'];
+    
+    w_half = D * d;
+    w = [w_half; flipud(w_half(1:end-1))];
+    
+    x = cos((0:N)' * pi / N);
+
+    % Scale points and weights to [a, b]
+    x = (b - a) / 2 * x + (a + b) / 2;
+    w = w * (b - a) / 2;
 end
 
 % Newton iteration to solve stage involving nonlinearity

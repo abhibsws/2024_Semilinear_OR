@@ -22,7 +22,7 @@ if save_fig
 end
 
 % loading data
-for eq_ind = 1:3
+for eq_ind = 3:3
     eqn=EQN{eq_ind};TC=IC(eq_ind); tf=TF(eq_ind); 
     m = M(eq_ind); spatial_order = sp_or{eq_ind};
     % for legends
@@ -159,17 +159,17 @@ for eq_ind = 1:3
             filename= sprintf('errdata/%s/ErrConvgData_%s_TC%d_tf%.1f.mat',eqn,eqn,TC,tf);
             load(filename)
 
-            st = [1,4,1,4]; en = [4,7,4,7];
-            Cof = [1e0,1e2,1e1,1e3]; Sl = [2,4,2,5]; 
-            yl = [1e-11,1e-13]; yu = [2e-2,1e-1];
+            st = [4,4,1,4]; en = [6,8,4,8];
+            Cof = [8e-1,5e1,1e1,1e3]; Sl = [2,4,2,5]; 
+            yl = [1e-11,1e-13]; yu = [1e-2,1e-1];
             % Coordinates to modify the positions of the xlabel and ylabel
             mod_XL = [
                       [-5e-3, 2e-12, 0];
                       [-5e-3, 2e-14, 0]
                       ];
             mod_YL = [
-                      [1e-4, -3e-7, 0];
-                      [1e-4, -1e-8, 0]
+                      [1e-4, -2e-7, 0];
+                      [1e-4, 0, 0]
                       ];
             % Plot
             for i = 1:2
